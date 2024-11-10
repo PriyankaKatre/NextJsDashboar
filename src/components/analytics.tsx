@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import Line from "@/components/graph/line";
 import Bar from "@/components/graph/Bar";

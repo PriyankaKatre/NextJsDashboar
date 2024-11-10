@@ -6,6 +6,8 @@ import { Provider } from "react-redux";
 import { store } from "@/redux/store";
 import { QueryClient, QueryClientProvider } from "react-query";
 import "./globals.css";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,7 +33,9 @@ export default function RootLayout({
       >
         <Provider store={store}>
           <QueryClientProvider client={queryClient}>
-            {children}
+            <Navbar />
+            <main className="flex-grow"> {children} </main>
+            <Footer />
           </QueryClientProvider>
         </Provider>
       </body>

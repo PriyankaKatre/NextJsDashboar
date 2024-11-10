@@ -20,7 +20,6 @@ const userSlice = createSlice({
       state.loading = action.payload;
     },
     setUsers: (state, action: PayloadAction<any[]>) => {
-        console.log("action.payload", action.payload);
       state.users = action.payload;
     },
     setError: (state, action: PayloadAction<string | null>) => {

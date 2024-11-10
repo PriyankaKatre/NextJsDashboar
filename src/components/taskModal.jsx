@@ -25,8 +25,6 @@ const TaskModal = ({ task, onSave, onClose }) => {
       ? tasks.map((t) => (t.id === task.id ? { ...t, ...taskData } : t))
       : [...tasks, { ...taskData, id: Date.now().toString() }];
 
-    console.log("Updated Tasks:", updatedTasks); // Add this line to log the updated tasks
-
     dispatch(setTasks(updatedTasks));
     onSave(taskData);
     onClose();

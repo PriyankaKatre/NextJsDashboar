@@ -19,11 +19,14 @@ const KanbanBoard = () => {
     const sourceDroppableId = result.source.droppableId;
     const destinationDroppableId = result.destination.droppableId;
 
+    // Clone the tasks array to avoid direct state mutation
     const updatedTasks = Array.isArray(tasks) ? [...tasks] : [];
 
+    // Find the moved task
     const [movedTask] = updatedTasks.splice(sourceIndex, 1);
-    movedTask.status = destinationDroppableId; 
+    movedTask.status = destinationDroppableId; // Update the status of the moved task
 
+    // Insert the moved task into the new position
     updatedTasks.splice(destinationIndex, 0, movedTask);
 
     dispatch(setTasks(updatedTasks));
@@ -48,8 +51,8 @@ const KanbanBoard = () => {
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <div className="flex space-x-4">
-        {["To Do", "In Progress", "Completed"].map((status, index) => (
-          <Droppable droppableId={status} key={index}>
+        {["To Do", "In Progress", "Completed"].map((status) => (
+          <Droppable droppableId={status} key={status}>
             {(provided) => (
               <div
                 className="w-1/3 p-4 bg-gray-100 rounded-lg justify-center"

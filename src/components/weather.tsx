@@ -20,7 +20,6 @@ const Weather = () => {
       .get(url)
       .then((response) => {
         setWeatherData(response.data);
-        console.log(response.data);
         setLoading(false);
         setIsError(false);
       })

@@ -23,7 +23,11 @@ const kanbanSlice = createSlice({
   reducers: {
     setTasks(state, action) {
       state.tasks = action.payload;
-      localStorage.setItem("tasks", JSON.stringify(state.tasks));
+      try {
+        localStorage.setItem("tasks", JSON.stringify(state.tasks));
+      } catch (e) {
+        console.error("Failed to save tasks to localStorage:", e);
+      }
     },
   },
 });
