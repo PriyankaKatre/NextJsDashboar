@@ -9,15 +9,15 @@ import { Card, CardContent } from "@/components/ui/card";
 const LineChartComponent = () => {
   return (
     <>
-      <div className="grid grid-cols-6 gap-4">
-        <div className="col-span-3">
+      <div className="grid md:grid-cols-6 gap-4">
+        <div className="col-span-3 md:col-span-3">
           <Card>
             <CardContent>
               <Line />
             </CardContent>
           </Card>
         </div>
-        <div className="col-span-3">
+        <div className="col-span-3 md:col-span-3">
           <Card>
             <CardContent>
               <Bar />

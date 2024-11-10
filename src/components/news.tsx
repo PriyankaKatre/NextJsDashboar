@@ -4,13 +4,19 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/redux/store";
 import { setLoading, setArticles, setError } from "@/redux/newsSlice";
-import { useFetchNews } from "@/hooks/useFetchNews";
+import { useFetchData } from "@/hooks/useFetchData";
 import NewsCard from "@/components/newsCard";
 import NewsHeader from "@/components/NewsHeader";
+import { Loader2 } from "lucide-react";
 
 const NewsList: React.FC = ({ isListView }: boolean) => {
   const dispatch = useDispatch<AppDispatch>();
-  const { isLoading, data, error } = useFetchNews();
+
+  const apiKey = process.env.NEXT_PUBLIC_NEWS_SECRET_KEY;
+  let dataUrl = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${apiKey}`;
+
+  const { isLoading, data, error } = useFetchData(dataUrl);
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
 
@@ -22,17 +28,26 @@ const NewsList: React.FC = ({ isListView }: boolean) => {
       dispatch(setError(error.message));
     } else if (data) {
       dispatch(setLoading(false));
-      dispatch(setArticles(data));
+      dispatch(setArticles(data.articles));
     }
   }, [isLoading, data, error, dispatch]);
 
   const { articles } = useSelector((state: RootState) => state.news);
-  if (isLoading) return <p>Loading...</p>;
+
+    if (isLoading) {
+        return (
+            <div className="flex justify-center items-center">
+            <Loader2 className="animate-spin" size={32} />
+        </div>
+        )   
+    };
+
   if (error) return <p>Error fetching news: {error.message}</p>;
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = articles.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems =
+    articles && articles.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(articles.length / itemsPerPage);
   const handleNextPage = () => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
@@ -75,7 +90,6 @@ const NewsList: React.FC = ({ isListView }: boolean) => {
 
 const News: React.FC = () => {
   const [isListView, setIsListView] = useState(false);
-  console.log("isListView", isListView);
   return (
     <div className="container mx-auto p-4">
       <NewsHeader setIsListView={setIsListView} />
