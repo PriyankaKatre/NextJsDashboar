@@ -9,7 +9,6 @@ interface NewsHeaderProps {
 
 const NewsHeader: React.FC<NewsHeaderProps> = ({ setIsListView }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  console.log("document.body", document.body);
   useEffect(() => {
     if (isDarkMode) {
       document.body.classList.add("dark");

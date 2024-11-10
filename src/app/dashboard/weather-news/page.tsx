@@ -7,15 +7,15 @@ const WeatherNews = () => {
     return (
       <main className="container mx-auto px-4">
         <div className="grid grid-cols-12 gap-4">
-            <div className="col-span-4">
-                <Weather />
-            </div>
-            <div className="col-span-8">
-                <News />
-            </div>
+          <div className="col-span-12 lg:col-span-4">
+            <Weather />
+          </div>
+          <div className="col-span-12 lg:col-span-8">
+            <News />
+          </div>
         </div>
-    </main>
-  );
+      </main>
+    );
 };
 
 export default WeatherNews;
