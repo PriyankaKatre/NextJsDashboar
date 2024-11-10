@@ -31,7 +31,9 @@ const NewsCard = ({ currentItems, isListView }) => {
                   alt="new image"
                 />
                 <div className="px-6 py-4">
-                  <h2 className="text-xl font-bold">{article.title}</h2>
+                  <h2 className="text-xl font-bold">
+                    {truncateText(article.title, 100)}
+                  </h2>
                   <span>
                     {article.author} :{dateString(article.publishedAt)}
                   </span>

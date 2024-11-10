@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/redux/store";
@@ -34,13 +32,13 @@ const NewsList: React.FC = ({ isListView }: boolean) => {
 
   const { articles } = useSelector((state: RootState) => state.news);
 
-    if (isLoading) {
-        return (
-            <div className="flex justify-center items-center">
-            <Loader2 className="animate-spin" size={32} />
-        </div>
-        )   
-    };
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center">
+        <Loader2 className="animate-spin" size={32} />
+      </div>
+    );
+  }
 
   if (error) return <p>Error fetching news: {error.message}</p>;
 
