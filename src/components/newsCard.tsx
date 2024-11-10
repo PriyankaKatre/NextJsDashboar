@@ -22,7 +22,7 @@ const NewsCard = ({ currentItems, isListView }) => {
               <div className="rounded overflow-hidden shadow-lg" key={index}>
                 <img
                   width="100%"
-                  className="md:h-30 lg:h-"
+                  className="md:h-30 lg:h-68"
                   src={
                     article.urlToImage
                       ? article.urlToImage

@@ -1,5 +1,4 @@
 "use client";
-
 import Weather from "@/components/weather";
 import News from "@/components/news";
 
