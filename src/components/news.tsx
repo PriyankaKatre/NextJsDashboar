@@ -26,7 +26,7 @@ const NewsList: React.FC<NewsListProps> = ({ isListView }) => {
       dispatch(setArticles(data.articles));
       dispatch(setLoading(false));
     } catch (error) {
-      dispatch(setError(error.message));
+      dispatch(setError(error));
       dispatch(setLoading(false));
     }
   };
@@ -47,7 +47,7 @@ const NewsList: React.FC<NewsListProps> = ({ isListView }) => {
     );
   }
 
-  if (error) return <p>Error fetching news: {error}</p>;
+  if (error) return <p>Error fetching news</p>;
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;

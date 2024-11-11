@@ -5,13 +5,13 @@ interface ErrorWithMessage {
 }
 interface NewsState {
   articles: [];
-  loading: boolean;
+  isLoading: boolean;
   error: ErrorWithMessage | null;
 }
 
 const initialState: NewsState = {
   articles: [],
-  loading: false,
+  isLoading: false,
   error: null,
 };
 
@@ -20,7 +20,7 @@ const newsSlice = createSlice({
   initialState,
   reducers: {
     setLoading: (state, action) => {
-      state.loading = action.payload;
+      state.isLoading = action.payload;
     },
     setArticles: (state, action) => {
       state.articles = action.payload;
