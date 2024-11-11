@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "npm install --force",
-    "build": "npm-run-all prebuild build-next",
+    "prebuild": "npm install --legacy-peer-deps",
+    "build": "npm run prebuild && next build",
     "build-next": "next build",
     "start": "next start",
     "lint": "next lint"
