@@ -6,13 +6,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { RootState } from "@/redux/kanbanSlice";
 
 const TaskModal = ({ task, onSave, onClose }) => {
   const [taskData, setTaskData] = useState(
     task || { title: "", description: "", dueDate: "", status: "To Do" }
   );
   const dispatch = useDispatch();
-  const tasks = useSelector((state) => state.kanban.tasks);
+  const tasks = useSelector((state: RootState) => state.kanban.tasks);
 
   useEffect(() => {
     setTaskData(

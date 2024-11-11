@@ -13,7 +13,7 @@ const DynamicTable = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const dataUrl = `https://jsonplaceholder.typicode.com/users3213`;
+  const dataUrl = `https://jsonplaceholder.typicode.com/users`;
   const { isLoading, data, error } = useFetchData(dataUrl);
  
   useEffect(() => {

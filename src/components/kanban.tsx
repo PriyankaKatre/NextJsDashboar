@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-import { setTasks } from "@/redux/kanbanSlice";
+import { setTasks, RootState } from "@/redux/kanbanSlice";
 import TaskModal from "@/components/taskModal";
 import { Button } from "@/components/ui/button";
 
 const KanbanBoard = () => {
-  const tasks = useSelector((state) => state.kanban.tasks);
+  const tasks = useSelector((state: RootState) => state.kanban.tasks);
   const dispatch = useDispatch();
   const [taskToEdit, setTaskToEdit] = useState(null);
   const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState(false);
@@ -18,14 +18,13 @@ const KanbanBoard = () => {
     const destinationIndex = result.destination.index;
     const destinationDroppableId = result.destination.droppableId;
 
-    // Clone the tasks array to avoid direct state mutation
+   
     const updatedTasks = Array.isArray(tasks) ? [...tasks] : [];
-
-    // Find the moved task
+   
     const [movedTask] = updatedTasks.splice(sourceIndex, 1);
-    movedTask.status = destinationDroppableId; // Update the status of the moved task
+    movedTask.status = destinationDroppableId; 
 
-    // Insert the moved task into the new position
+   
     updatedTasks.splice(destinationIndex, 0, movedTask);
 
     dispatch(setTasks(updatedTasks));

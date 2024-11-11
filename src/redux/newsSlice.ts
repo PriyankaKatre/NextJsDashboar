@@ -1,9 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+interface ErrorWithMessage {
+  message: string;
+}
 interface NewsState {
   articles: [];
   loading: boolean;
-  error: string | null;
+  error: ErrorWithMessage | null;
 }
 
 const initialState: NewsState = {
@@ -16,14 +19,14 @@ const newsSlice = createSlice({
   name: "news",
   initialState,
   reducers: {
-    setLoading: (state, action: PayloadAction<boolean>) => {
+    setLoading: (state, action) => {
       state.loading = action.payload;
     },
-    setArticles: (state, action: PayloadAction<[]>) => {
+    setArticles: (state, action) => {
       state.articles = action.payload;
     },
-    setError: (state, action: PayloadAction<string | null>) => {
-      state.error = action.payload;
+    setError: (state, action) => {
+      state.error = action.payload.message;
     },
   },
 });

@@ -7,7 +7,12 @@ import NewsCard from "@/components/newsCard";
 import NewsHeader from "@/components/newsHeader";
 import { Loader2 } from "lucide-react";
 
-const NewsList: React.FC = ({ isListView }: boolean) => {
+// Define the props interface
+interface NewsListProps {
+  isListView: boolean;
+}
+
+const NewsList: React.FC<NewsListProps> = ({ isListView }) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const apiKey = process.env.NEXT_PUBLIC_NEWS_SECRET_KEY;
@@ -23,7 +28,7 @@ const NewsList: React.FC = ({ isListView }: boolean) => {
       dispatch(setLoading(true));
     } else if (error) {
       dispatch(setLoading(false));
-      dispatch(setError(error.message));
+      dispatch(setError(error));
     } else if (data) {
       dispatch(setLoading(false));
       dispatch(setArticles(data.articles));
@@ -40,12 +45,11 @@ const NewsList: React.FC = ({ isListView }: boolean) => {
     );
   }
 
-  if (error) return <p>Error fetching news: {error.message}</p>;
+  if (error) return <p>Error fetching news</p>;
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems =
-    articles && articles.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = articles.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(articles.length / itemsPerPage);
   const handleNextPage = () => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
@@ -62,8 +66,7 @@ const NewsList: React.FC = ({ isListView }: boolean) => {
           onClick={handlePrevPage}
           className={`${
             currentPage === 1 ? "bg-gray-300" : "bg-gray-700"
-          } text-white
-            font-bold py-2 px-4 rounded`}
+          } text-white font-bold py-2 px-4 rounded`}
           disabled={currentPage === 1}
         >
           Previous Page
@@ -75,8 +78,7 @@ const NewsList: React.FC = ({ isListView }: boolean) => {
           onClick={handleNextPage}
           className={`${
             currentPage === totalPages ? "bg-gray-300" : "bg-gray-700"
-          } text-white
-            font-bold py-2 px-4 rounded`}
+          } text-white font-bold py-2 px-4 rounded`}
           disabled={currentPage === totalPages}
         >
           Next Page
@@ -87,7 +89,7 @@ const NewsList: React.FC = ({ isListView }: boolean) => {
 };
 
 const News: React.FC = () => {
-  const [isListView, setIsListView] = useState(false);
+  const [isListView, setIsListView] = useState<boolean>(false);
   return (
     <div className="container mx-auto p-4">
       <NewsHeader setIsListView={setIsListView} />
