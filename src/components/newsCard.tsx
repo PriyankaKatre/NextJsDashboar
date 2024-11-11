@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { dateString, truncateText } from "@/utils/common";
 import Link from "next/link";
 
