@@ -29,7 +29,7 @@ const DynamicTable = () => {
   }, [isLoading, data, error, dispatch]);
 
   const { users } = useSelector((state: RootState) => state.users);
-  const filteredData = users?.filter((user) =>
+  const filteredData = users?.filter((user:User) =>
     user?.name?.toLowerCase().includes(search.toLowerCase())
   );
 
