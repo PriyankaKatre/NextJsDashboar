@@ -1,6 +1,6 @@
 import React from "react";
 import Line from "@/components/graph/line";
-import Bar from "@/components/graph/Bar";
+import Bar from "@/components/graph/bar";
 import DynamicTable from "@/components/graph/table";
 import { Card, CardContent } from "@/components/ui/card";
 

@@ -4,7 +4,7 @@ import { RootState, AppDispatch } from "@/redux/store";
 import { setLoading, setArticles, setError } from "@/redux/newsSlice";
 import { useFetchData } from "@/hooks/useFetchData";
 import NewsCard from "@/components/newsCard";
-import NewsHeader from "@/components/NewsHeader";
+import NewsHeader from "@/components/";
 import { Loader2 } from "lucide-react";
 
 const NewsList: React.FC = ({ isListView }: boolean) => {

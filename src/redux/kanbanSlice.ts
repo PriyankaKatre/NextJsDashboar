@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const loadTasksFromLocalStorage = () => {
   if (typeof window !== "undefined") {
