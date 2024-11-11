@@ -6,13 +6,13 @@ const Bar = () => {
   const chartInstanceRef = useRef(null);
 
   useEffect(() => {
-    const ctx = chartRef.current.getContext("2d");
+    const ctx = chartRef?.current?.getContext("2d");
 
     if (chartInstanceRef.current) {
-      chartInstanceRef.current.destroy();
+      chartInstanceRef?.current?.destroy();
     }
 
-    chartInstanceRef.current = new Chart(ctx, {
+    chartInstanceRef?.current = new Chart(ctx, {
       type: "bar",
       data: {
         labels: [

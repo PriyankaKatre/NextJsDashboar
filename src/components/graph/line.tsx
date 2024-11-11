@@ -6,14 +6,14 @@ const Line = () => {
   const chartInstanceRef = useRef();
 
   useEffect(() => {
-    const ctx = chartRef.current.getContext("2d");
+    const ctx = chartRef?.current?.getContext("2d");
 
     // Destroy the existing chart instance before creating a new one
     if (chartInstanceRef.current) {
-      chartInstanceRef.current.destroy();
+      chartInstanceRef?.current?.destroy();
     }
 
-    chartInstanceRef.current = new Chart(ctx, {
+    chartInstanceRef?.current = new Chart(ctx, {
       type: "line",
       data: {
         labels: ["Day1", "Day2", "Day3", "Day4", "Day5", "Day6", "Day7"],
