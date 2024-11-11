@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/redux/store";
 import { setLoading, setArticles, setError } from "@/redux/newsSlice";
+import { useFetchData } from "@/hooks/useFetchData";
 import NewsCard from "@/components/newsCard";
 import NewsHeader from "@/components/newsHeader";
 import { Loader2 } from "lucide-react";
+
 
 interface NewsListProps {
   isListView: boolean;
@@ -13,31 +15,27 @@ interface NewsListProps {
 const NewsList: React.FC<NewsListProps> = ({ isListView }) => {
   const dispatch = useDispatch<AppDispatch>();
 
+  const apiKey = process.env.NEXT_PUBLIC_NEWS_SECRET_KEY;
+  const dataUrl = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${apiKey}`;
+
+  const { isLoading, data, error } = useFetchData(dataUrl);
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
 
-  const fetchNews = async () => {
-    dispatch(setLoading(true));
-    try {
-      const response = await fetch(
-        `/.netlify/functions/newsProxy?apiKey=${process.env.NEXT_PUBLIC_NEWS_SECRET_KEY}`
-      );
-      const data = await response.json();
-      dispatch(setArticles(data.articles));
-      dispatch(setLoading(false));
-    } catch (error) {
-      dispatch(setError(error));
-      dispatch(setLoading(false));
-    }
-  };
-
   useEffect(() => {
-    fetchNews();
-  }, []);
+    if (isLoading) {
+      dispatch(setLoading(true));
+    } else if (error) {
+      dispatch(setLoading(false));
+      dispatch(setError(error));
+    } else if (data) {
+      dispatch(setLoading(false));
+      dispatch(setArticles(data.articles));
+    }
+  }, [isLoading, data, error, dispatch]);
 
-  const { isLoading, articles, error } = useSelector(
-    (state: RootState) => state.news
-  );
+  const { articles } = useSelector((state: RootState) => state.news);
 
   if (isLoading) {
     return (
