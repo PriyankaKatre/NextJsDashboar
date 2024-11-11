@@ -1,11 +1,12 @@
-
 import React, { useState } from "react";
 import axios from "axios";
 import WeatherCard from "@/components/weatherCard";
 import { Loader2 } from "lucide-react";
+import {WeatherData} from '@/types/weather'
 
+// Define the WeatherData type
 const Weather = () => {
-  const [weatherData, setWeatherData] = useState(null);
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [city, setCity] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -20,6 +21,7 @@ const Weather = () => {
       .get(url)
       .then((response) => {
         setWeatherData(response.data);
+        console.log(response.data);
         setLoading(false);
         setIsError(false);
       })
@@ -32,6 +34,7 @@ const Weather = () => {
   const handleSearch = () => {
     fetchWeather(city as string);
   };
+
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">How&apos;s the weather today?</h1>
@@ -52,7 +55,7 @@ const Weather = () => {
       </div>
       {isError && (
         <div className="text-red-500">
-          Something went wrong please try to add correct city name
+          Something went wrong, please try entering the correct city name.
         </div>
       )}
       {loading ? (
