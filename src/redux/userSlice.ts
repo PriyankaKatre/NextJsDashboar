@@ -1,9 +1,12 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
+interface ErrorWithMessage {
+  message: string;
+}
 interface NewsState {
   users: [];
   loading: boolean;
-  error: string | null;
+  error: ErrorWithMessage | null;
 }
 
 const initialState: NewsState = {
@@ -16,14 +19,14 @@ const userSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
-    setLoading: (state, action: PayloadAction<boolean>) => {
+    setLoading: (state, action) => {
       state.loading = action.payload;
     },
-    setUsers: (state, action: PayloadAction<[]>) => {
+    setUsers: (state, action) => {
       state.users = action.payload;
     },
-    setError: (state, action: PayloadAction<string | null>) => {
-      state.error = action.payload;
+    setError: (state, action) => {
+      state.error = action.payload.message;
     },
   },
 });

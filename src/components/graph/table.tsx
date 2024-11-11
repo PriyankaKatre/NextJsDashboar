@@ -5,6 +5,7 @@ import { RootState, AppDispatch } from "@/redux/store";
 import { useFetchData } from "@/hooks/useFetchData";
 import { setLoading, setUsers, setError } from "@/redux/userSlice";
 import { Loader2 } from "lucide-react";
+import { User } from "@/types/user";
 
 const DynamicTable = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -12,15 +13,15 @@ const DynamicTable = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const dataUrl = `https://jsonplaceholder.typicode.com/users`;
+  const dataUrl = `https://jsonplaceholder.typicode.com/users3213`;
   const { isLoading, data, error } = useFetchData(dataUrl);
-
+ 
   useEffect(() => {
     if (isLoading) {
       dispatch(setLoading(true));
     } else if (error) {
       dispatch(setLoading(false));
-      dispatch(setError(error.message));
+      dispatch(setError(error));
     } else if (data) {
       dispatch(setLoading(false));
       dispatch(setUsers(data));
@@ -29,7 +30,7 @@ const DynamicTable = () => {
 
   const { users } = useSelector((state: RootState) => state.users);
   const filteredData = users?.filter((user) =>
-    user.name.toLowerCase().includes(search.toLowerCase())
+    user?.name?.toLowerCase().includes(search.toLowerCase())
   );
 
   const handleChangePage = (event, newPage) => {
@@ -52,7 +53,7 @@ const DynamicTable = () => {
       </div>
     );
   }
-  if (error) return <p>Error fetching data: {error.message}</p>;
+  if (error) return <p>Error fetching data</p>;
 
   return (
     <div className="p-4 bg-white shadow-md rounded-lg">
@@ -76,7 +77,7 @@ const DynamicTable = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredData.map((user) => (
+            {filteredData.map((user: User) => (
               <tr key={user.id}>
                 <td className="px-4 py-2 border-b">{user.name}</td>
                 <td className="px-4 py-2 border-b">{user.username}</td>
