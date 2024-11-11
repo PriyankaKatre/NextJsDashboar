@@ -16,7 +16,6 @@ const KanbanBoard = () => {
 
     const sourceIndex = result.source.index;
     const destinationIndex = result.destination.index;
-    const sourceDroppableId = result.source.droppableId;
     const destinationDroppableId = result.destination.droppableId;
 
     // Clone the tasks array to avoid direct state mutation

@@ -11,7 +11,7 @@ const NewsList: React.FC = ({ isListView }: boolean) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const apiKey = process.env.NEXT_PUBLIC_NEWS_SECRET_KEY;
-  let dataUrl = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${apiKey}`;
+  const dataUrl = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${apiKey}`;
 
   const { isLoading, data, error } = useFetchData(dataUrl);
 

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface NewsState {
-  articles: any[];
+  articles: [];
   loading: boolean;
   error: string | null;
 }
@@ -19,7 +19,7 @@ const newsSlice = createSlice({
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
     },
-    setArticles: (state, action: PayloadAction<any[]>) => {
+    setArticles: (state, action: PayloadAction<[]>) => {
       state.articles = action.payload;
     },
     setError: (state, action: PayloadAction<string | null>) => {
